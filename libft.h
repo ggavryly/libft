@@ -17,6 +17,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <fcntl.h>
+# include <limits.h>
 # define WHTSPC s[i] == ' ' || s[i] == '\n'|| s[i] == '\t' || s[i] == ','
 
 typedef struct		s_list
