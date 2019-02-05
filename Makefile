@@ -78,7 +78,8 @@ SRCS = ft_memset.c \
 	   ft_sqrt.c \
 	   ft_range.c \
 	   get_next_line.c \
-	   file_to_line.c
+	   file_to_line.c \
+	   ft_itoa_base.c
 	   
 
 OBJC = $(SRCS:.c=.o)

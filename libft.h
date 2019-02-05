@@ -18,6 +18,7 @@
 # include <unistd.h>
 # include <fcntl.h>
 # include <limits.h>
+# include <stdint.h>
 # define WHTSPC s[i] == ' ' || s[i] == '\n'|| s[i] == '\t' || s[i] == ','
 
 typedef struct		s_list
@@ -114,6 +115,10 @@ char				*ft_strtrim(char const *s);
 char				**ft_strsplit(char const *s, char c);
 
 char				*ft_itoa(int n);
+
+char				*itoa_base(intmax_t value, uintmax_t base, char a_a32);
+
+char				*itoa_base_u(uintmax_t value, uintmax_t base, char a_a32);
 
 void				ft_putchar(char c);
 
