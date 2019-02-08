@@ -12,9 +12,11 @@
 
 NAME = libft.a
 
-HEAD =  -I libft.h
+INC = -I ./include/
 
-SRCS = ft_memset.c \
+FLAGS = -Wall -Wextra -Werror
+
+SRCS_NAME = ft_memset.c \
 	   ft_bzero.c \
 	   ft_memcpy.c \
 	   ft_memccpy.c \
@@ -80,24 +82,33 @@ SRCS = ft_memset.c \
 	   get_next_line.c \
 	   file_to_line.c \
 	   ft_itoa_base.c
-	   
 
-OBJC = $(SRCS:.c=.o)
+SRCS_PATH = src/
+OBJ_PATH  = obj/
 
-FLAG = gcc -c -Wall -Wextra -Werror
+SRCS = $(addprefix $(SRCS_PATH), $(SRCS_NAME))
+OBJ = $(addprefix $(OBJ_PATH), $(SRCS_NAME:.c=.o))
 
 all: $(NAME)
 
-$(NAME): $(OBJC)
-	ar rcs $(NAME) $(OBJC)
+$(NAME): $(OBJ)
+	@ar rc $(NAME) $(OBJ)
+	@ranlib $(NAME)
+	@echo "\033[32m\033[1m[√] - Binary \033[1;33m\033[4m\033[1m$(NAME)\033[0m\033[1;0m\033[32m\033[1m created.\033[0m"
 
-$(OBJC): $(SRCS)
-		$(FLAG) $(SRCS)
+$(OBJ_PATH)%.o: $(SRCS_PATH)%.c
+	@mkdir -p obj
+	@gcc -c $(FLAGS) $(INC) $< -o $@
+	@echo "\033[32m\033[1m[√] - Compilation of \033[0m\033[33m\033[1m$(notdir $<)\033[0m\033[32m\033[1m done.\033[0m"
 
 clean:
-	rm -f $(OBJC)
+	@/bin/rm -rf $(OBJ_PATH)
+	@echo "\033[31m\033[1m[X] - Objects files $(OBJS_LIST)removed.\033[0m"
 
 fclean: clean
-	rm -f $(NAME)
+	@/bin/rm -rf $(NAME)
+	@echo "\033[31m\033[1m[X] - Bin \033[4m$(NAME)\033[0m \033[31m\033[1mremoved.\033[0m"
 
 re: fclean all
+
+.PHONY: all, clean, fclean, re
